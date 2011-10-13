@@ -5,7 +5,7 @@ import XMonad.Config.Gnome
 
 import XMonad.Util.EZConfig
 import qualified XMonad.StackSet as W
-
+--whatever comment
 -- dzen!!
 import XMonad.Hooks.DynamicLog
 import System.IO
