@@ -18,7 +18,8 @@ import XMonad.Util.WorkspaceCompare
 -- http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Util-WorkspaceCompare.html
 
 import XMonad.Hooks.ManageDocks -- for avoidStruts
-import XMonad.Layout.Gaps -- for stupid second screen gaps!
+import XMonad.Layout.Tabbed
+
 
 -- myXFont = " -fn '-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-1'"
 
@@ -51,8 +52,10 @@ main = do
     workspaceBar <- spawnPipe myStatusBar
     xmonad $ gnomeConfig {
         workspaces = myWorkspaces
+        , normalBorderColor = "#dddddd"
+        , focusedBorderColor = "#ff0000"
         , modMask = mod4Mask -- windows key
-        , layoutHook = avoidStruts $ layoutHook gnomeConfig -- avoidStruts for dzen(slightly broken) composed with default gnomeConfig
+        , layoutHook = avoidStruts $ simpleTabbed ||| layoutHook gnomeConfig -- avoidStruts for dzen(slightly broken) composed with default gnomeConfig
         , logHook = do 
             myLogHook workspaceBar 
             logHook desktopConfig -- send data to Gnome
