@@ -55,7 +55,7 @@ main = do
         , normalBorderColor = "#dddddd"
         , focusedBorderColor = "#ff0000"
         , modMask = mod4Mask -- windows key
-        , layoutHook = avoidStruts $ simpleTabbed ||| layoutHook gnomeConfig -- avoidStruts for dzen(slightly broken) composed with default gnomeConfig
+        , layoutHook = avoidStruts $ layoutHook gnomeConfig   ||| simpleTabbed -- avoidStruts for dzen(slightly broken) composed with default gnomeConfig
         , logHook = do 
             myLogHook workspaceBar 
             logHook desktopConfig -- send data to Gnome
