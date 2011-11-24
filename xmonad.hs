@@ -63,21 +63,30 @@ myLogHook h = dynamicLogWithPP $ dzenPP
       , ppWsSep             =   ""
       , ppSep               =   "  |  "
       , ppTitle             =   (" " ++) . dzenColor "white" "black" . dzenEscape
+      , ppLayout            =  dzenColor "black" "#cccc" . (\ x ->  case x of 
+                                                                          "Tabbed Simplest" -> " tabs "
+                                                                          _                 -> pad x
+                                                           )
 --      , ppLayout            =  ""
       , ppSort              =  mkWsSort getXineramaWsCompare -- [ left : right ] others
 --      , ppExtra             =  
       , ppOutput            =   hPutStrLn h
     }
 
+
 main = do
     workspaceBar <- spawnPipe myStatusBar
     xmonad $ gnomeConfig {
+        
         workspaces = myWorkspaces
         , startupHook = startupHook desktopConfig >> setWMName "LG3D"
         , normalBorderColor = "#dddddd"
+--        , focusedBorderColor = "#C8FF63"
         , focusedBorderColor = "#ff0000"
         , modMask = mod4Mask -- windows key
-        , layoutHook = avoidStruts $ layoutHook gnomeConfig   ||| simpleTabbed -- avoidStruts for dzen(slightly broken) composed with default gnomeConfig
+--        , layoutHook = avoidStruts $ noBorders $ layoutHook gnomeConfig ||| simpleTabbed -- avoidStruts for dzen(slightly broken) composed with default gnomeConfig
+        , layoutHook = avoidStruts $ desktopLayoutModifiers $ layoutHook defaultConfig 
+--        , layoutHook = layoutHook gnomeConfig ||| Dishes ||| simpleTabbed
         , logHook = do 
             myLogHook workspaceBar 
             logHook desktopConfig -- send data to Gnome
