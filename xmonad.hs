@@ -3,6 +3,11 @@ import XMonad
 import XMonad.Config.Desktop -- super for gnome
 import XMonad.Config.Gnome
 
+-- set window name for Java Apps compat.
+-- startupHook = startupHook desktopConfig >> setWMName "LG3D"
+
+import XMonad.Hooks.SetWMName
+
 import XMonad.Util.EZConfig
 import qualified XMonad.StackSet as W
 --whatever comment
@@ -52,6 +57,7 @@ main = do
     workspaceBar <- spawnPipe myStatusBar
     xmonad $ gnomeConfig {
         workspaces = myWorkspaces
+        , startupHook = startupHook desktopConfig >> setWMName "LG3D"
         , normalBorderColor = "#dddddd"
         , focusedBorderColor = "#ff0000"
         , modMask = mod4Mask -- windows key
