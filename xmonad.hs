@@ -24,6 +24,22 @@ import XMonad.Util.WorkspaceCompare
 
 import XMonad.Hooks.ManageDocks -- for avoidStruts
 import XMonad.Layout.Tabbed
+import XMonad.Layout.NoBorders
+import XMonad.Layout.Dishes
+import XMonad.Layout.Roledex
+
+import qualified XMonad.Actions.Search as S
+import qualified XMonad.Prompt as P
+
+
+
+import XMonad.Util.NamedScratchpad
+
+scratchpads = [
+     NS "notes" "gvim --role notes ~/notes.txt" (role =? "notes") nonFloating
+   , NS "calc" "speedcrunch" (title =? "SpeedCrunch") defaultFloating
+   ] where role = stringProperty "WM_WINDOW_ROLE"
+
 
 
 -- myXFont = " -fn '-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-1'"
@@ -73,6 +89,10 @@ myKeys =
     [
     -- other additional keys
     ("M-g",  spawn "chrome")
+    , ( "M-n", namedScratchpadAction scratchpads "notes" )
+    , ( "M-o", namedScratchpadAction scratchpads "calc" )
+    , ( "M-S-g",  S.promptSearch P.defaultXPConfig S.google )
+    
     --,("M-t",  spawn "gnome-terminal")
     ]
     ++ -- important since ff. is a list itself, can't just put inside above list
