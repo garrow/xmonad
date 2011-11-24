@@ -28,7 +28,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Dishes
 import XMonad.Layout.Roledex
 
-import qualified XMonad.Actions.Search as S
+import XMonad.Actions.Search 
 import qualified XMonad.Prompt as P
 
 
@@ -39,6 +39,11 @@ scratchpads = [
      NS "notes" "gvim --role notes ~/notes.txt" (role =? "notes") nonFloating
    , NS "calc" "speedcrunch" (title =? "SpeedCrunch") defaultFloating
    ] where role = stringProperty "WM_WINDOW_ROLE"
+
+
+
+ticketwise :: SearchEngine
+ticketwise = searchEngine "ticketwise" "https://intranet.hitwise.com/ticketwise/view.php?id=" 
 
 
 
@@ -100,7 +105,8 @@ myKeys =
     ("M-g",  spawn "chrome")
     , ( "M-n", namedScratchpadAction scratchpads "notes" )
     , ( "M-o", namedScratchpadAction scratchpads "calc" )
-    , ( "M-S-g",  S.promptSearch P.defaultXPConfig S.google )
+    , ( "M-S-g",  promptSearch P.defaultXPConfig google )
+    , ( "M-t",  promptSearch P.defaultXPConfig ticketwise )
     
     --,("M-t",  spawn "gnome-terminal")
     ]
