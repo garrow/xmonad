@@ -10,7 +10,6 @@ import XMonad.Hooks.SetWMName
 
 import XMonad.Util.EZConfig
 import qualified XMonad.StackSet as W
---whatever comment
 -- dzen!!
 import XMonad.Hooks.DynamicLog
 import System.IO
@@ -23,6 +22,8 @@ import XMonad.Util.WorkspaceCompare
 -- http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Util-WorkspaceCompare.html
 
 import XMonad.Hooks.ManageDocks -- for avoidStruts
+
+-- Prebuilt Layouts 
 import XMonad.Layout.Tabbed
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Dishes
@@ -68,10 +69,7 @@ myLogHook h = dynamicLogWithPP $ dzenPP
       , ppWsSep             =   ""
       , ppSep               =   "  |  "
       , ppTitle             =   (" " ++) . dzenColor "white" "black" . dzenEscape
-      , ppLayout            =  dzenColor "black" "#cccc" . (\ x ->  case x of 
-                                                                          "Tabbed Simplest" -> " tabs "
-                                                                          _                 -> pad x
-                                                           )
+      , ppLayout            =  dzenColor "black" "#cccc" . pad 
 --      , ppLayout            =  ""
       , ppSort              =  mkWsSort getXineramaWsCompare -- [ left : right ] others
 --      , ppExtra             =  
