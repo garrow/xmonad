@@ -103,8 +103,8 @@ myKeys =
     ("M-g",  spawn "chrome")
     , ( "M-n", namedScratchpadAction scratchpads "notes" )
     , ( "M-o", namedScratchpadAction scratchpads "calc" )
-    , ( "M-S-g",  promptSearch P.defaultXPConfig google )
-    , ( "M-t",  promptSearch P.defaultXPConfig ticketwise )
+    , ( "M-f",  promptSearch P.defaultXPConfig google )
+    , ( "M-S-t",  promptSearch P.defaultXPConfig ticketwise )
     
     --,("M-t",  spawn "gnome-terminal")
     ]
