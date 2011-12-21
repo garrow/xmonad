@@ -41,11 +41,11 @@ import qualified XMonad.Prompt as P
 
 import XMonad.Util.NamedScratchpad
 
-scratchpads = [
-     NS "notes" "gvim --role notes ~/notes.txt" (role =? "notes") nonFloating
-   , NS "calc" "speedcrunch" (title =? "SpeedCrunch") defaultFloating
-   ] where role = stringProperty "WM_WINDOW_ROLE"
-
+--scratchpads = [
+--     NS "notes" "gvim --role notes ~/notes.txt" (role =? "notes") nonFloating
+--   , NS "calc" "speedcrunch" (title =? "SpeedCrunch") defaultFloating
+--   ] where role = stringProperty "WM_WINDOW_ROLE"
+--
 
 
 ticketwise :: SearchEngine
@@ -106,8 +106,8 @@ myKeys =
     [
     -- other additional keys
     ("M-g",  spawn "chrome")
-    , ( "M-n", namedScratchpadAction scratchpads "notes" )
-    , ( "M-o", namedScratchpadAction scratchpads "calc" )
+--    , ( "M-n", namedScratchpadAction scratchpads "notes" )
+--    , ( "M-o", namedScratchpadAction scratchpads "calc" )
     , ( "M-f",  promptSearch P.defaultXPConfig google )
     , ( "M-S-t",  promptSearch P.defaultXPConfig ticketwise )
     , ( "M-`",  toggleWS )
