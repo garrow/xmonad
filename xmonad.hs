@@ -17,6 +17,10 @@ import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.FadeInactive
 import XMonad.Util.Run
 
+-- Cycle between workspaces
+import XMonad.Actions.CycleWS
+
+
 -- workspace sorting for dzen 
 import XMonad.Util.WorkspaceCompare
 -- http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Util-WorkspaceCompare.html
@@ -29,6 +33,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Dishes
 import XMonad.Layout.Roledex
 
+-- Search bar and prompts
 import XMonad.Actions.Search 
 import qualified XMonad.Prompt as P
 
@@ -105,6 +110,11 @@ myKeys =
     , ( "M-o", namedScratchpadAction scratchpads "calc" )
     , ( "M-f",  promptSearch P.defaultXPConfig google )
     , ( "M-S-t",  promptSearch P.defaultXPConfig ticketwise )
+    , ( "M-`",  toggleWS )
+    , ( "M-<Tab>",  nextWS )
+    , ( "M-S-<Tab>",  prevWS )
+    , ( "<Alt>-<Tab>",  windows W.focusDown )
+    , ( "<Alt>-S-<Tab>",  windows W.focusUp )
     
     --,("M-t",  spawn "gnome-terminal")
     ]
