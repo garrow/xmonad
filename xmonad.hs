@@ -19,6 +19,7 @@ import XMonad.Util.Run
 
 -- Cycle between workspaces
 import XMonad.Actions.CycleWS
+import XMonad.Actions.GridSelect
 
 
 -- workspace sorting for dzen 
@@ -153,7 +154,10 @@ myKeys =
     , ( "M-S-<Tab>",  prevWS )
     , ( "<Alt>-<Tab>",  windows W.focusDown )
     , ( "<Alt>-S-<Tab>",  windows W.focusUp )
-    
+    , ( "M-S-s", goToSelected gsconfig2 )
+    , ( "M-S-w", bringSelected gsconfig3 )
+--    , ( "M-S-d", gridSelectWindow defaultGSConfig )
+
     --,("M-t",  spawn "gnome-terminal")
     ]
     ++ -- important since ff. is a list itself, can't just put inside above list
@@ -164,4 +168,24 @@ myKeys =
                                       , ("S-", windows . W.shift)]
     ]
 
+gsconfig3 = (buildDefaultGSConfig bwColorizer) { gs_cellheight = 50, gs_cellwidth = 200}
+gsconfig2 = defaultGSConfig { gs_cellheight = 50, gs_cellwidth = 200 }
 
+ -- | A green monochrome colorizer based on window class
+greenColorizer = colorRangeFromClassName
+                      black            -- lowest inactive bg
+                      (0x70,0xFF,0x70) -- highest inactive bg
+                      black            -- active bg
+                      white            -- inactive fg
+                      white            -- active fg
+   where black = minBound
+         white = maxBound
+
+bwColorizer = colorRangeFromClassName
+                      black            -- lowest inactive bg
+                      (0xAA,0xAA,0xAA) -- highest inactive bg
+                      white            -- active bg
+                      white            -- inactive fg
+                      (0xFF, 0x00,0x00)             -- active fg
+   where black = minBound
+         white = maxBound
