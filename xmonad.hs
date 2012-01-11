@@ -22,20 +22,21 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.GridSelect
 
 
--- workspace sorting for dzen 
+-- workspace sorting for dzen
 import XMonad.Util.WorkspaceCompare
 -- http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Util-WorkspaceCompare.html
 
 import XMonad.Hooks.ManageDocks -- for avoidStruts
 
--- Prebuilt Layouts 
+-- Prebuilt Layouts
 import XMonad.Layout.Tabbed
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Dishes
 import XMonad.Layout.Roledex
 
+
 -- Search bar and prompts
-import XMonad.Actions.Search 
+import XMonad.Actions.Search
 import qualified XMonad.Prompt as P
 
 
@@ -86,14 +87,14 @@ takeTopFocus =
 
 
 ticketwise :: SearchEngine
-ticketwise = searchEngine "ticketwise" "https://intranet.hitwise.com/ticketwise/view.php?id=" 
+ticketwise = searchEngine "ticketwise" "https://intranet.hitwise.com/ticketwise/view.php?id="
 
 
 
 -- myXFont = " -fn '-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-1'"
 
---myStatusBar = "dzen2 -x '0' -y '1065' -h '15' -w '800' -ta 'l' -fg '#FFFFFF' -bg '#000000' -m" ++ myXFont 
--- myStatusBar2 = "dzen2 -xs 2 -x '30' -y '' -h '24' -w '800' -ta 'l' -fg '#FFFFFF' -bg '#000000' -m" ++ myXFont 
+--myStatusBar = "dzen2 -x '0' -y '1065' -h '15' -w '800' -ta 'l' -fg '#FFFFFF' -bg '#000000' -m" ++ myXFont
+-- myStatusBar2 = "dzen2 -xs 2 -x '30' -y '' -h '24' -w '800' -ta 'l' -fg '#FFFFFF' -bg '#000000' -m" ++ myXFont
 --myStatusBar = "cat > /tmp/xmonad.bar.txt"
 myStatusBar = "/home/garrowb/.xmonad/multipipe.rb"
 
@@ -111,10 +112,10 @@ myLogHook h = dynamicLogWithPP $ dzenPP
       , ppWsSep             =   ""
       , ppSep               =   "  |  "
       , ppTitle             =   (" " ++) . dzenColor "white" "black" . dzenEscape
-      , ppLayout            =  dzenColor "black" "#cccc" . pad 
+      , ppLayout            =  dzenColor "black" "#cccc" . pad
 --      , ppLayout            =  ""
       , ppSort              =  mkWsSort getXineramaWsCompare -- [ left : right ] others
---      , ppExtra             =  
+--      , ppExtra             =
       , ppOutput            =   hPutStrLn h
     }
 
@@ -122,7 +123,7 @@ myLogHook h = dynamicLogWithPP $ dzenPP
 main = do
     workspaceBar <- spawnPipe myStatusBar
     xmonad $ gnomeConfig {
-        
+
         workspaces = myWorkspaces
         , startupHook = startupHook desktopConfig >> setWMName "LG3D"
         , normalBorderColor = "#dddddd"
@@ -130,17 +131,17 @@ main = do
         , focusedBorderColor = "#ff0000"
         , modMask = mod4Mask -- windows key
 --        , layoutHook = avoidStruts $ noBorders $ layoutHook gnomeConfig ||| simpleTabbed -- avoidStruts for dzen(slightly broken) composed with default gnomeConfig
-        , layoutHook = avoidStruts $ desktopLayoutModifiers $ layoutHook defaultConfig 
+        , layoutHook = avoidStruts $ desktopLayoutModifiers $ layoutHook defaultConfig
 --        , layoutHook = layoutHook gnomeConfig ||| Dishes ||| simpleTabbed
-        , logHook = do 
+        , logHook = do
             takeTopFocus
             setWMName "LG3D"
             myLogHook workspaceBar
             logHook desktopConfig -- send data to Gnome
         } `additionalKeysP` myKeys
- 
+
 myWorkspaces = ["1","2","3","4","5","6.music","7.mail","8.chat","9","10"]
- 
+
 myKeys =
     [
     -- other additional keys
@@ -161,7 +162,7 @@ myKeys =
     --,("M-t",  spawn "gnome-terminal")
     ]
     ++ -- important since ff. is a list itself, can't just put inside above list
-    [ 
+    [
     (otherModMasks ++ "M-" ++ [key], action tag)
          | (tag, key)  <- zip myWorkspaces "1234567890"
          , (otherModMasks, action) <- [ ("", windows . W.greedyView) -- was W.greedyView
