@@ -41,6 +41,42 @@ import qualified XMonad.Prompt as P
 
 import XMonad.Util.NamedScratchpad
 
+------------------------------------------
+-- Focus fix for java apps
+-- http://mth.io/posts/xmonad-java-focus/
+--
+import Control.Monad
+atom_WM_TAKE_FOCUS ::
+  X Atom
+atom_WM_TAKE_FOCUS =
+  getAtom "WM_TAKE_FOCUS"
+
+takeFocusX ::
+  Window
+  -> X ()
+takeFocusX w =
+  withWindowSet . const $ do
+    dpy       <- asks display
+    wmtakef   <- atom_WM_TAKE_FOCUS
+    wmprot    <- atom_WM_PROTOCOLS
+    protocols <- io $ getWMProtocols dpy w
+    when (wmtakef `elem` protocols) $
+      io . allocaXEvent $ \ev -> do
+          setEventType ev clientMessage
+          setClientMessageEvent ev w wmprot 32 wmtakef currentTime
+          sendEvent dpy w False noEventMask ev
+
+takeTopFocus ::
+  X ()
+takeTopFocus =
+  withWindowSet $ maybe (setFocusX =<< asks theRoot) takeFocusX . W.peek
+-- main = xmonad defaultConfig {
+--    -- Modify the log hook of your configuration to include a call to
+--    -- takeTopFocus before setWMNAme
+--    logHook                 = takeTopFocus >> setWMName "LG3D"
+-- }
+----------------------------------------
+
 --scratchpads = [
 --     NS "notes" "gvim --role notes ~/notes.txt" (role =? "notes") nonFloating
 --   , NS "calc" "speedcrunch" (title =? "SpeedCrunch") defaultFloating
@@ -96,7 +132,9 @@ main = do
         , layoutHook = avoidStruts $ desktopLayoutModifiers $ layoutHook defaultConfig 
 --        , layoutHook = layoutHook gnomeConfig ||| Dishes ||| simpleTabbed
         , logHook = do 
-            myLogHook workspaceBar 
+            takeTopFocus
+            setWMName "LG3D"
+            myLogHook workspaceBar
             logHook desktopConfig -- send data to Gnome
         } `additionalKeysP` myKeys
  
