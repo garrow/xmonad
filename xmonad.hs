@@ -156,7 +156,7 @@ myKeys =
     , ( "<Alt>-<Tab>",  windows W.focusDown )
     , ( "<Alt>-S-<Tab>",  windows W.focusUp )
     , ( "M-S-s", goToSelected gsconfig2 )
-    , ( "M-S-w", bringSelected gsconfig3 )
+--    , ( "M-S-w", bringSelected gsconfig3 )
 --    , ( "M-S-d", gridSelectWindow defaultGSConfig )
 
     --,("M-t",  spawn "gnome-terminal")
