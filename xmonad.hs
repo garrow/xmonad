@@ -151,14 +151,14 @@ myKeys =
     , ( "M-f",  promptSearch P.defaultXPConfig google )
     , ( "M-S-t",  promptSearch P.defaultXPConfig ticketwise )
     , ( "M-`",  toggleWS )
-    , ( "M-<Tab>",  nextWS )
-    , ( "M-S-<Tab>",  prevWS )
-    , ( "<Alt>-<Tab>",  windows W.focusDown )
-    , ( "<Alt>-S-<Tab>",  windows W.focusUp )
-    , ( "M-S-s", goToSelected gsconfig2 )
---    , ( "M-S-w", bringSelected gsconfig3 )
---    , ( "M-S-d", gridSelectWindow defaultGSConfig )
-
+--    , ( "M-<Alt>-<Tab>",  nextWS )
+ --   , ( "M-S-<Alt>-<Tab>",  prevWS )
+  --  , ( "A-<Tab>",  windows W.focusDown )
+   -- , ( "<Alt>-S-<Tab>",  windows W.focusUp )
+      , ( "M-S-s", goToSelected gsconfig2 )
+      , ( "M-S-a", bringSelected gsconfig3 )
+      , ( "M-x", spawnSelected defaultGSConfig ["rubymine", "evolution", "pidgin"]  )
+--      , ( "M-S-d", gridSelectWindow defaultGSConfig )
     --,("M-t",  spawn "gnome-terminal")
     ]
     ++ -- important since ff. is a list itself, can't just put inside above list
