@@ -141,6 +141,7 @@ main = do
         } `additionalKeysP` myKeys
 
 myWorkspaces = ["1","2","3","4","5","6.music","7.mail","8.chat","9","10"]
+spawnApps = ["rubymine", "evolution", "pidgin", "virtualbox", "gnome-terminal" ,"chrome", "netbeans","gedit" ]
 
 myKeys =
     [
@@ -157,7 +158,7 @@ myKeys =
    -- , ( "<Alt>-S-<Tab>",  windows W.focusUp )
       , ( "M-S-s", goToSelected gsconfig2 )
       , ( "M-S-a", bringSelected gsconfig3 )
-      , ( "M-x", spawnSelected defaultGSConfig ["rubymine", "evolution", "pidgin"]  )
+      , ( "M-x", spawnSelected defaultGSConfig spawnApps  )
 --      , ( "M-S-d", gridSelectWindow defaultGSConfig )
     --,("M-t",  spawn "gnome-terminal")
     ]
