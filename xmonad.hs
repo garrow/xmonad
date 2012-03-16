@@ -147,6 +147,7 @@ myKeys =
     [
     -- other additional keys
     ("M-g",  spawn "chrome")
+    ,("M-y",  spawn "chrome 'http://www.youtube.com/view_all_playlists'")
 --    , ( "M-n", namedScratchpadAction scratchpads "notes" )
 --    , ( "M-o", namedScratchpadAction scratchpads "calc" )
     , ( "M-f",  promptSearch P.defaultXPConfig google )
