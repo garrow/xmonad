@@ -39,7 +39,9 @@ import XMonad.Layout.Roledex
 import XMonad.Actions.Search
 import qualified XMonad.Prompt as P
 
-
+-- Custom window managehooks
+-- https://github.com/rangalo/dotfiles/blob/master/.xmonad/xmonad.hs
+import XMonad.Hooks.ManageHelpers (isFullscreen, isDialog, doFullFloat, doCenterFloat)
 
 import XMonad.Util.NamedScratchpad
 
@@ -101,7 +103,7 @@ myStatusBar = "/home/garrowb/.xmonad/multipipe.rb"
 myLogHook :: Handle -> X ()
 --myLogHook h = dynamicLogWithPP $ dzenPP { ppOutput = hPutStrLn h , ppSort              =  mkWsSort getXineramaWsCompare }
 --myLogHook h = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn h , ppSort              =  mkWsSort getXineramaWsCompare }
-
+--
 myLogHook h = dynamicLogWithPP $ dzenPP
     {
         ppCurrent           =   dzenColor "#3EB5FF" "black" . pad . wrap "[" "]"
@@ -119,6 +121,28 @@ myLogHook h = dynamicLogWithPP $ dzenPP
       , ppOutput            =   hPutStrLn h
     }
 
+_Tall = Tall nmaster delta ratio
+  where
+    nmaster  = 1
+    ratio    = 1/2
+    delta    = 3/100
+
+
+myManageHook = composeAll
+    [
+-- className =? "MPlayer"        --> doFloat
+--     , className =? "Smplayer"       --> doFloat
+--     , className =? "Gimp"           --> doFloat
+--     , className =? "Gimp"           --> doFloat
+--     , className =? "IDEA"           --> doFloat
+--     , className =? "Picasa"         --> doFloat
+--     , className =? "Eclipse"        --> doCenterFloat
+--   , resource  =? "desktop_window" --> doIgnore
+     isFullscreen                  --> doFullFloat
+    ,isDialog                      --> doCenterFloat
+    ,manageHook gnomeConfig
+    ]
+
 
 main = do
     workspaceBar <- spawnPipe myStatusBar
@@ -131,8 +155,11 @@ main = do
         , focusedBorderColor = "#ff0000"
         , modMask = mod4Mask -- windows key
 --        , layoutHook = avoidStruts $ noBorders $ layoutHook gnomeConfig ||| simpleTabbed -- avoidStruts for dzen(slightly broken) composed with default gnomeConfig
-        , layoutHook = avoidStruts $ desktopLayoutModifiers $ layoutHook defaultConfig
+        , layoutHook = smartBorders (layoutHook gnomeConfig)
+--       , layoutHook = avoidStruts $ desktopLayoutModifiers $ (Tall) ||| ( Mirror _Tall)  ||| ( noBorders Full )
+--        , layoutHook = avoidStruts $ Tall |||  Mirror _Tall  ||| ( noBorders Full )
 --        , layoutHook = layoutHook gnomeConfig ||| Dishes ||| simpleTabbed
+        ,manageHook = myManageHook
         , logHook = do
             takeTopFocus
             setWMName "LG3D"
@@ -141,7 +168,7 @@ main = do
         } `additionalKeysP` myKeys
 
 myWorkspaces = ["1","2","3","4","5","6.music","7.mail","8.chat","9","10"]
-spawnApps = ["rubymine", "evolution", "pidgin", "virtualbox", "gnome-terminal" ,"chrome", "netbeans","gedit","sublime" ,"firefox", "rhythmbox"]
+spawnApps = ["rubymine", "evolution", "pidgin", "virtualbox", "gnome-terminal" ,"chrome", "netbeans","gedit","sublime" ,"firefox", "rhythmbox","pgadmin3"]
 
 myKeys =
     [
