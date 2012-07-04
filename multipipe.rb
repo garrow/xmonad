@@ -14,8 +14,8 @@ end
 
 
 
-left = Screen.new 1920, 1080
-right = Screen.new 1280, 1024
+left = Screen.new 1920, 1200 
+right = Screen.new 1920 , 1080
 
 
 
