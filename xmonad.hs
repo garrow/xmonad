@@ -106,12 +106,12 @@ myLogHook :: Handle -> X ()
 --
 myLogHook h = dynamicLogWithPP $ dzenPP
     {
-        ppCurrent           =   dzenColor "#3EB5FF" "black" . pad . wrap "[" "]"
-      , ppVisible           =   dzenColor "white" "black" . pad . wrap " " " "
-      , ppHidden            =   dzenColor "#999999" "black" . pad
-      , ppHiddenNoWindows   =   dzenColor "#444444" "black" . pad
-      , ppUrgent            =   dzenColor "red" "black" . pad
-      , ppWsSep             =   ""
+        ppCurrent           =   dzenColor "#3EB5FF" "black" . wrap "[" "]"
+      , ppVisible           =   dzenColor "white" "black" . wrap " " " "
+      , ppHidden            =   dzenColor "#999999" "black"
+      , ppHiddenNoWindows   =   dzenColor "#444444" "black"
+      , ppUrgent            =   dzenColor "red" "black"
+      , ppWsSep             =   "  "
       , ppSep               =   "  |  "
       , ppTitle             =   (" " ++) . dzenColor "white" "black" . dzenEscape
       , ppLayout            =  dzenColor "black" "#cccc" . pad
