@@ -168,7 +168,24 @@ main = do
         } `additionalKeysP` myKeys
 
 myWorkspaces = ["1","2","3","4","5","6.music","7.mail","8.chat","9","10"]
-spawnApps = ["rubymine", "evolution", "pidgin", "virtualbox", "gnome-terminal" ,"chrome", "netbeans","gedit","sublime" ,"firefox", "rhythmbox","pgadmin3", "gnome-screenshot --interactive"]
+spawnApps =
+  [
+  "rubymine",
+  "evolution",
+  "pidgin",
+  "virtualbox",
+  "gnome-terminal",
+  "chrome",
+  "netbeans",
+  "gedit",
+  "sublime",
+  "firefox",
+  "rhythmbox",
+  "pgadmin3",
+  "gnome-screenshot --interactive",
+  "keepassx",
+  "/home/garrowb/jxplorer/jxplorer.sh"
+  ]
 
 myKeys =
     [
