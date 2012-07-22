@@ -31,7 +31,7 @@ bg = '#000000'
 # specifically set the height to match the fake gnome panel that provides the struts
 # dzen wont set struts on bars not on the edges of the monitor, so uneven
 # desktop size wont strut on the smaller monitor 
-right_height =  height + 5
+right_height =  height + 6
 
 dzen_left = "dzen2 -x 0 -y #{left.y - height} -h '15' -w #{left.x} -ta 'l' -fg '#{fg}' -bg '#{bg}' -m  -fn '-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-1'" 
 dzen_right = "dzen2 -xs 2 -x '0' -y '#{right.y - right_height}' -h #{right_height} -w '#{right.x}' -ta 'l' -fg '#{fg}' -bg '#{bg}' -m   -fn '-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-1'"
