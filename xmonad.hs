@@ -184,7 +184,7 @@ spawnApps =
   "pgadmin3",
   "gnome-screenshot --interactive",
   "keepassx",
-  "/home/garrowb/jxplorer/jxplorer.sh"
+  "speedcrunch"
   ]
 
 myKeys =
