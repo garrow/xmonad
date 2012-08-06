@@ -138,7 +138,8 @@ myManageHook = composeAll
 --     , className =? "Picasa"         --> doFloat
 --     , className =? "Eclipse"        --> doCenterFloat
 --   , resource  =? "desktop_window" --> doIgnore
-     isFullscreen                  --> doFullFloat
+     resource  =? "Do"             --> doIgnore
+    ,isFullscreen                  --> doFullFloat
     ,isDialog                      --> doCenterFloat
     ,manageHook gnomeConfig
     ]
