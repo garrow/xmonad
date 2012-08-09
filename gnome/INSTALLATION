@@ -1,0 +1,8 @@
+
+
+
+copy xmonad.session to 
+/usr/share/gnome-session/sessions/xmonad.session  
+
+
+copy xmonad-gnome-session.desktop to /usr/share/xsessions/xmonad-gnome-session.desktop

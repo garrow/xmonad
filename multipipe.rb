@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby 
 
-debug = false
-
 Screen = Struct.new :x, :y
 
 left = Screen.new 1920, 1200 
