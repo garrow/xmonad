@@ -1,4 +1,5 @@
 import XMonad
+import System.Exit
 
 import XMonad.Config.Desktop -- super for gnome
 import XMonad.Config.Gnome
@@ -191,7 +192,8 @@ spawnApps =
 myKeys =
     [
     -- other additional keys
-    ("M-g",  spawn "chrome")
+    ( "M-S-q" ,io (exitWith ExitSuccess))
+    ,("M-g",  spawn "chrome")
     ,("M-y",  spawn "chrome 'http://www.youtube.com/view_all_playlists'")
 --    , ( "M-n", namedScratchpadAction scratchpads "notes" )
 --    , ( "M-o", namedScratchpadAction scratchpads "calc" )
