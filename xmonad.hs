@@ -193,6 +193,7 @@ myKeys =
     [
     -- other additional keys
     ( "M-S-q" ,io (exitWith ExitSuccess))
+    ,( "M-q" , spawn "xmonad --recompile && xmonad --restart") -- Manually force this due to failing on not being in path, despite being in PATH. FIXME
     ,("M-g",  spawn "chrome")
     ,("M-y",  spawn "chrome 'http://www.youtube.com/view_all_playlists'")
 --    , ( "M-n", namedScratchpadAction scratchpads "notes" )
