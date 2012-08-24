@@ -1,0 +1,9 @@
+[GNOME Session]
+Name=GNOME Classic - Xmonad
+RequiredComponents=gnome-panel;gnome-settings-daemon;
+RequiredProviders=windowmanager;
+DefaultProvider-windowmanager=xmonad
+DefaultProvider-notifications=notify-osd
+IsRunnableHelper=/usr/lib/gnome-session/gnome-session-check-accelerated
+FallbackSession=gnome-fallback
+DesktopName=GNOME

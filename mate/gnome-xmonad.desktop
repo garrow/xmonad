@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=GNOME Classic /w Xmonad
+Comment=Gnome classic with Xmonad as window manager -- GB
+Exec=gnome-session --session=gnome-xmonad
+TryExec=gnome-session
+Icon=
+Type=Application
+X-Ubuntu-Gettext-Domain=gnome-session-3.0
