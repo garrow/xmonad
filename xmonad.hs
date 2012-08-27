@@ -1,6 +1,8 @@
 import XMonad
 import System.Exit
 
+import XMonad.Hooks.FadeInactive
+
 import XMonad.Config.Desktop -- super for gnome
 import XMonad.Config.Gnome
 
@@ -145,6 +147,9 @@ myManageHook = composeAll
     ,manageHook gnomeConfig
     ]
 
+myLogHook2 :: X ()
+myLogHook2 = fadeInactiveLogHook fadeAmount
+	where fadeAmount = 0xdddddddd
 
 main = do
     workspaceBar <- spawnPipe myStatusBar
@@ -166,6 +171,7 @@ main = do
             takeTopFocus
             setWMName "LG3D"
             myLogHook workspaceBar
+--	    myLogHook2
             logHook desktopConfig -- send data to Gnome
         } `additionalKeysP` myKeys
 
