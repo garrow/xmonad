@@ -48,6 +48,13 @@ import XMonad.Hooks.ManageHelpers (isFullscreen, isDialog, doFullFloat, doCenter
 
 import XMonad.Util.NamedScratchpad
 
+--- Server mode for sending commands to xmonad 
+-- http://hackage.haskell.org/packages/archive/xmonad-contrib/0.10/doc/html/XMonad-Hooks-ServerMode.html
+import XMonad.Hooks.ServerMode
+import XMonad.Actions.Commands
+
+
+
 ------------------------------------------
 -- Focus fix for java apps
 -- http://mth.io/posts/xmonad-java-focus/
@@ -156,6 +163,7 @@ main = do
     xmonad $ gnomeConfig {
 
         workspaces = myWorkspaces
+        , handleEventHook = serverModeEventHook -- ServerMode
         , startupHook = startupHook desktopConfig >> setWMName "LG3D"
         , normalBorderColor = "#dddddd"
 --        , focusedBorderColor = "#C8FF63"
