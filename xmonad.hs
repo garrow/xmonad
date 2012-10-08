@@ -13,8 +13,12 @@ import XMonad.Hooks.SetWMName
 
 import XMonad.Util.EZConfig
 import qualified XMonad.StackSet as W
+
 -- dzen!!
 import XMonad.Hooks.DynamicLog
+import XMonad.Util.Loggers
+import Text.Printf
+
 import System.IO
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.FadeInactive
@@ -131,6 +135,26 @@ myLogHook h = dynamicLogWithPP $ dzenPP
       , ppOutput            =   hPutStrLn h
     }
 
+
+xmlLogHook :: Handle -> X ()
+xmlLogHook h = dynamicLogWithPP $ dzenPP
+  {
+      ppCurrent           =   wrap "<ws class='current'>" "</ws>"
+    , ppVisible           =   wrap "<ws class='visible'>" "</ws>"
+    , ppHidden            =   wrap "<ws class='hidden'>" "</ws>"
+    , ppHiddenNoWindows   =   wrap "<ws class='empty'>" "</ws>"
+    , ppUrgent            =   wrap "<ws class='urgent'>" "</ws>"
+    --, ppWsSep             =   ""
+    , ppSep               =   "<section />"
+    , ppTitle             =  dzenEscape . wrap "<title>" "</title>"
+    , ppLayout            =  dzenColor "black" "#cccc" . pad 
+--      , ppLayout            =  ""
+    , ppSort              =  mkWsSort getXineramaWsCompare -- [ left : right ] others
+    , ppOutput            =  hPutStrLn h
+    --, ppExtras = [ padL loadAvg, logCmd "fortune -n 40 -s" ]
+  }
+
+
 _Tall = Tall nmaster delta ratio
   where
     nmaster  = 1
@@ -234,8 +258,23 @@ myKeys =
                                       , ("S-", windows . W.shift)]
     ]
 
-gsconfig3 = (buildDefaultGSConfig bwColorizer) { gs_cellheight = 50, gs_cellwidth = 200}
-gsconfig2 = defaultGSConfig { gs_cellheight = 50, gs_cellwidth = 200 }
+gsconfig3 = (buildDefaultGSConfig bwColorizer) { gs_cellheight = 50, gs_cellwidth = 200, gs_navigate = navNSearch }
+gsconfig2 = (buildDefaultGSConfig customAColorizer) { gs_cellheight = 50, gs_cellwidth = 200,  gs_navigate = navNSearch, gs_originFractX = 1, gs_originFractY = 0.5 }
+
+customAColorizer :: Window -> Bool -> X (String, String)
+--customAColorizer w active = 
+--    do classname <- runQuery className w
+--      if active
+--        then return ("#FFFFFF", "#FFFFFF")
+--        else return (printf "%02x" "#CCCCCC")
+customAColorizer w active = return ("#FFFFFF", "#CCCCCC")
+        --else return (printf "%02x" "#CCCCCC")
+
+
+        --if active 
+        --    then return "#FFFFFF"
+        --    else return "#CCCCCC"
+
 
  -- | A green monochrome colorizer based on window class
 greenColorizer = colorRangeFromClassName

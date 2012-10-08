@@ -17,11 +17,43 @@ BarOpts = Struct.new :x, :y, :height, :width, :fg_colour, :bg_colour do
   end
 end
 
+class DzenXmlFormatter 
+
+	def self.color fg_colour=''
+		" ^fg(#{fg_colour})^bg()"
+	end
+
+
+	def self.remove_formatting string
+		string.gsub! /\<\/ws\>/ , ' '
+		string.gsub! /\<ws class='current'\>/ ,  ' '
+		string.gsub! /\<ws class='visible'\>/ ,  ' '
+		string.gsub! /\<ws class='hidden'\>/ ,  ' '
+		string.gsub! /\<ws class='empty'\>/ , ' '
+
+
+	end
+
+
+	def self.format string
+		string.gsub! /\<\/ws\>/ , color
+		string.gsub! /\<section \/\>/ , ' ^r(5x5) '
+		string.gsub! /\<ws class='current'\>/ ,  color('#3EB5FF')
+		string.gsub! /\<ws class='visible'\>/ ,  color('#FFFFFF')
+		string.gsub! /\<ws class='hidden'\>/ ,  color('#999999')
+		string.gsub! /\<ws class='empty'\>/ , color('#444444')
+
+		string.gsub! /\<title\>/ ,  color('#FFB5FF')
+		string.gsub! /\<\/title\>/ ,  color
+		
+
+	end
+
+end
 
 
 
-
-#bg = '#C0BCB4' #greyish
+# bg = '#C0BCB4' #greyish
 
 # specifically set the height to match the fake gnome panel that provides the struts
 # dzen wont set struts on bars not on the edges of the monitor, so uneven
@@ -35,9 +67,11 @@ right_bar = BarOpts.new left_screen.x, right_screen.y - right_height,  right_hei
 left = IO.popen( left_bar.command , 'r+' ) 
 right = IO.popen( right_bar.command , 'r+' ) 
 
-ARGF.each_line do |l| 
-  left << l 
-  right << l 
+ARGF.each_line do |line| 
+  formatted = DzenXmlFormatter.format(line)
+  formatted << "^ca(1, notify-send 'hello')^fg(red)HELLO^fg()^ca()"
+  left << formatted
+  right << formatted
 end
 
 
