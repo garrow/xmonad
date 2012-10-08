@@ -2,25 +2,38 @@
 
 Screen = Struct.new :x, :y
 
-left = Screen.new 1920, 1200 
-right = Screen.new 1920 , 1080
+left_screen = Screen.new 1920, 1200 
+right_screen = Screen.new 1920 , 1080
 
-height = 15
+bar_height = 18
 
 fg = '#FFFFFF'
 bg = '#000000'
+
+
+BarOpts = Struct.new :x, :y, :height, :width, :fg_colour, :bg_colour do 
+  def command
+    "dzen2 -x #{x} -y #{y} -h '#{height}' -w #{width} -ta 'l' -fg '#{fg_colour}' -bg '#{bg_colour}' -m  -fn '-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-1'"
+  end
+end
+
+
+
+
+
 #bg = '#C0BCB4' #greyish
 
 # specifically set the height to match the fake gnome panel that provides the struts
 # dzen wont set struts on bars not on the edges of the monitor, so uneven
 # desktop size wont strut on the smaller monitor 
-right_height =  height + 6
+right_height = bar_height + 1
 
-dzen_left = "dzen2 -x 0 -y #{left.y - height} -h '15' -w #{left.x} -ta 'l' -fg '#{fg}' -bg '#{bg}' -m  -fn '-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-1'" 
-dzen_right = "dzen2 -xs 2 -x '0' -y '#{right.y - right_height}' -h #{right_height} -w '#{right.x}' -ta 'l' -fg '#{fg}' -bg '#{bg}' -m   -fn '-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-1'"
+left_bar = BarOpts.new 0, left_screen.y - bar_height, bar_height, left_screen.x, fg, bg
+right_bar = BarOpts.new left_screen.x, right_screen.y - right_height,  right_height, right_screen.x, fg, bg
 
-left = IO.popen( dzen_left , 'r+' ) 
-right = IO.popen( dzen_right , 'r+' ) 
+
+left = IO.popen( left_bar.command , 'r+' ) 
+right = IO.popen( right_bar.command , 'r+' ) 
 
 ARGF.each_line do |l| 
   left << l 
