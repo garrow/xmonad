@@ -3,3 +3,6 @@ xmonad.hi
 xmonad.o
 xmonad.errors
 history
+sendCommand
+sendCommand.hi
+sendCommand.o

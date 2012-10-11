@@ -69,9 +69,10 @@ right = IO.popen( right_bar.command , 'r+' )
 
 ARGF.each_line do |line| 
   formatted = DzenXmlFormatter.format(line)
-  formatted << "^ca(1, notify-send 'hello')^fg(red)HELLO^fg()^ca()"
-  left << formatted
-  right << formatted
+#  formatted << "^ca(1, notify-send 'hello')^fg(red)HELLO^fg()^ca()"
+
+  left << line
+  right << line
 end
 
 
