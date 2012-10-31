@@ -212,6 +212,7 @@ myWorkspaces = ["1","2","3","4","5","6.music","7.mail","8.chat","9","10"]
 spawnApps =
   [
   "rubymine",
+  "pycharm",
   "evolution",
   "pidgin",
   "virtualbox",
