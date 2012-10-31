@@ -57,6 +57,10 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Hooks.ServerMode
 import XMonad.Actions.Commands
 
+-- DynamicWorkspaces
+import XMonad.Actions.DynamicWorkspaces
+import XMonad.Actions.CopyWindow(copy)
+
 
 
 ------------------------------------------
@@ -208,7 +212,7 @@ main = do
             logHook desktopConfig -- send data to Gnome
         } `additionalKeysP` myKeys
 
-myWorkspaces = ["1","2","3","4","5","6.music","7.mail","8.chat","9","10"]
+myWorkspaces = ["1","2","3","4","5","6","7","8","9","10"]
 spawnApps =
   [
   "rubymine",
@@ -251,6 +255,12 @@ myKeys =
     , ( "M-x", spawnSelected defaultGSConfig spawnApps  )
 --      , ( "M-S-d", gridSelectWindow defaultGSConfig )
     --,("M-t",  spawn "gnome-terminal")
+    , ( "M-i", addWorkspace "dummy" )
+    , ( "M-S-<Backspace>", removeWorkspace)
+    , ( "M-v" , selectWorkspace P.defaultXPConfig)
+    , ( "M-m" , withWorkspace P.defaultXPConfig (windows . W.shift))
+    , ( "M-S-m", withWorkspace P.defaultXPConfig (windows . copy))
+    , ( "M-S-r",  renameWorkspace P.defaultXPConfig)
     ]
     ++ -- important since ff. is a list itself, can't just put inside above list
     [
