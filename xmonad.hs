@@ -177,6 +177,7 @@ myManageHook = composeAll
 --     , className =? "Eclipse"        --> doCenterFloat
 --   , resource  =? "desktop_window" --> doIgnore
      className =? "Keepassx"       --> doCenterFloat
+    ,className =? "jetbrains-pycharm" --> doFloat
     ,resource  =? "Do"             --> doIgnore
     ,isFullscreen                  --> doFullFloat
     ,isDialog                      --> doCenterFloat
