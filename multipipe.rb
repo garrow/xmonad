@@ -5,7 +5,7 @@ Screen = Struct.new :x, :y
 left_screen = Screen.new 1920, 1200 
 right_screen = Screen.new 1920 , 1080
 
-bar_height = 18
+bar_height = 19
 
 fg = '#FFFFFF'
 bg = '#000000'
