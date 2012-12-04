@@ -231,7 +231,8 @@ spawnApps =
   "pgadmin3",
   "gnome-screenshot --interactive",
   "keepassx",
-  "speedcrunch"
+  "speedcrunch",
+  "idea"
   ]
 
 myKeys =
