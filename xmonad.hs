@@ -253,7 +253,7 @@ myKeys =
     , ( "M1-S-<Tab>",  windows W.focusUp )
     , ( "M-S-s", goToSelected gsconfig2 )
     , ( "M-S-a", bringSelected gsconfig3 )
-    , ( "M-x", spawnSelected defaultGSConfig spawnApps  )
+    , ( "M-x", spawnSelected gs_spawn_config spawnApps  )
 --      , ( "M-S-d", gridSelectWindow defaultGSConfig )
     --,("M-t",  spawn "gnome-terminal")
     , ( "M-i", addWorkspace "dummy" )
@@ -270,6 +270,8 @@ myKeys =
          , (otherModMasks, action) <- [ ("", windows . W.greedyView) -- was W.greedyView
                                       , ("S-", windows . W.shift)]
     ]
+
+gs_spawn_config = ( buildDefaultGSConfig defaultColorizer) { gs_navigate = navNSearch }
 
 gsconfig3 = (buildDefaultGSConfig bwColorizer) { gs_cellheight = 50, gs_cellwidth = 200, gs_navigate = navNSearch }
 gsconfig2 = (buildDefaultGSConfig customAColorizer) { gs_cellheight = 50, gs_cellwidth = 200,  gs_navigate = navNSearch, gs_originFractX = 1, gs_originFractY = 0.5 }
