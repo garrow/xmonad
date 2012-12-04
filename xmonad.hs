@@ -227,7 +227,6 @@ spawnApps =
   "gedit",
   "sublime",
   "firefox",
-  "rhythmbox",
   "pgadmin3",
   "gnome-screenshot --interactive",
   "keepassx",
