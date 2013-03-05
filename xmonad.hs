@@ -231,7 +231,8 @@ spawnApps =
   "gnome-screenshot --interactive",
   "keepassx",
   "speedcrunch",
-  "idea"
+  "idea",
+  "spotify"
   ]
 
 myKeys =
