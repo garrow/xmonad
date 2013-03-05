@@ -52,7 +52,7 @@ import XMonad.Hooks.ManageHelpers (isFullscreen, isDialog, doFullFloat, doCenter
 
 import XMonad.Util.NamedScratchpad
 
---- Server mode for sending commands to xmonad 
+--- Server mode for sending commands to xmonad
 -- http://hackage.haskell.org/packages/archive/xmonad-contrib/0.10/doc/html/XMonad-Hooks-ServerMode.html
 import XMonad.Hooks.ServerMode
 import XMonad.Actions.Commands
@@ -151,7 +151,7 @@ xmlLogHook h = dynamicLogWithPP $ dzenPP
     --, ppWsSep             =   ""
     , ppSep               =   "<section />"
     , ppTitle             =  dzenEscape . wrap "<title>" "</title>"
-    , ppLayout            =  dzenColor "black" "#cccc" . pad 
+    , ppLayout            =  dzenColor "black" "#cccc" . pad
 --      , ppLayout            =  ""
     , ppSort              =  mkWsSort getXineramaWsCompare -- [ left : right ] others
     , ppOutput            =  hPutStrLn h
@@ -236,38 +236,36 @@ spawnApps =
 
 myKeys =
     [
-    -- other additional keys
-    ( "M-S-q" ,io (exitWith ExitSuccess))
-    , ( "M-S-l" , spawn "gnome-screensaver-command --lock" )
-    ,( "M-q" , spawn "xmonad --recompile && xmonad --restart") -- Manually force this due to failing on not being in path, despite being in PATH. FIXME
-    ,("M-g",  spawn "chrome")
-    ,("M-y",  spawn "chrome 'http://www.youtube.com/view_all_playlists'")
---    , ( "M-n", namedScratchpadAction scratchpads "notes" )
---    , ( "M-o", namedScratchpadAction scratchpads "calc" )
-    , ( "M-f",  promptSearch P.defaultXPConfig google )
-    , ( "M-S-t",  promptSearch P.defaultXPConfig ticketwise )
-    , ( "M-`",  toggleWS )
-    , ( "M-<Tab>", nextWS )
-    , ( "M-S-<Tab>", prevWS )
-    , ( "M1-<Tab>",  windows W.focusDown )
-    , ( "M1-S-<Tab>",  windows W.focusUp )
+    -- Manually bind restart & quit due to failing on not being in path, despite being in PATH. FIXME
+    ( "M-S-q", io (exitWith ExitSuccess))
+    , ( "M-q", spawn "xmonad --recompile && xmonad --restart")
+    -- Workspace management
+    , ( "M-`",        toggleWS )
+    , ( "M-<Tab>",    nextWS )
+    , ( "M-S-<Tab>",  prevWS )
+    , ( "M1-<Tab>",   windows W.focusDown ) -- Alt-Tab Support
+    , ( "M1-S-<Tab>", windows W.focusUp )   -- Alt-Tab Support
     , ( "M-S-s", goToSelected gsconfig2 )
     , ( "M-S-a", bringSelected gsconfig3 )
-    , ( "M-x", spawnSelected gs_spawn_config spawnApps  )
---      , ( "M-S-d", gridSelectWindow defaultGSConfig )
-    --,("M-t",  spawn "gnome-terminal")
-    , ( "M-i", addWorkspace "dummy" )
-    , ( "M-S-<Backspace>", removeWorkspace)
-    , ( "M-v" , selectWorkspace P.defaultXPConfig)
-    , ( "M-m" , withWorkspace P.defaultXPConfig (windows . W.shift))
+    , ( "M-i",   addWorkspace "dummy" )
+    , ( "M-v" ,  selectWorkspace P.defaultXPConfig)
+    , ( "M-m" ,  withWorkspace P.defaultXPConfig (windows . W.shift))
     , ( "M-S-m", withWorkspace P.defaultXPConfig (windows . copy))
-    , ( "M-S-r",  renameWorkspace P.defaultXPConfig)
+    , ( "M-S-r", renameWorkspace P.defaultXPConfig)
+    , ( "M-S-<Backspace>", removeWorkspace)
+    -- App management
+    , ( "M-x",  spawnSelected gs_spawn_config spawnApps  ) -- Launcher Menu
+    , ( "M-g",  spawn "chrome")
+    , ( "M-S-l",spawn "gnome-screensaver-command --lock" )
+    , ( "M-y",  spawn "chrome 'http://www.youtube.com/view_all_playlists'")
+    , ( "M-f",  promptSearch P.defaultXPConfig google )
+    , ( "M-S-t",promptSearch P.defaultXPConfig ticketwise )
     ]
     ++ -- important since ff. is a list itself, can't just put inside above list
     [
     (otherModMasks ++ "M-" ++ [key], action tag)
          | (tag, key)  <- zip myWorkspaces "1234567890"
-         , (otherModMasks, action) <- [ ("", windows . W.greedyView) -- was W.greedyView
+         , (otherModMasks, action) <- [ ("", windows . W.greedyView)
                                       , ("S-", windows . W.shift)]
     ]
 
