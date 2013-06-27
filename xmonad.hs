@@ -239,6 +239,7 @@ myKeys =
     -- Manually bind restart & quit due to failing on not being in path, despite being in PATH. FIXME
     ( "M-S-q", io (exitWith ExitSuccess))
     , ( "M-q", spawn "xmonad --recompile && xmonad --restart")
+    , ( "M-d", spawn "gnome-terminal")
     -- Workspace management
     , ( "M-`",        toggleWS )
     , ( "M-<Tab>",    nextWS )
