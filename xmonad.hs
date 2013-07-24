@@ -231,7 +231,8 @@ spawnApps =
   "keepassx",
   "speedcrunch",
   "idea",
-  "spotify"
+  "spotify",
+  "vim"
   ]
 
 myKeys =
